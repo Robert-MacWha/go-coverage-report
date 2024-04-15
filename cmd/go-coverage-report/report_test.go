@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -14,8 +15,10 @@ func TestReport_Markdown(t *testing.T) {
 	newCov, err := ParseCoverage("testdata/new-coverage.txt")
 	require.NoError(t, err)
 
-	changedFiles, err := ParseChangedFiles("testdata/changed-files.json", "github.com/fgrosse/prioqueue")
+	changedFiles, err := ParseChangedFiles("testdata/changed-files.json", "github.com/fgrosse/prioqueue", []string{"sort"})
 	require.NoError(t, err)
+
+	log.Println(changedFiles)
 
 	report := NewReport(oldCov, newCov, changedFiles)
 	actual := report.Markdown()

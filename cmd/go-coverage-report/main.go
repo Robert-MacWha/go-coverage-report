@@ -31,9 +31,10 @@ OPTIONS:
 `, filepath.Base(os.Args[0])))
 
 type options struct {
-	root   string
-	trim   string
-	format string
+	root    string
+	trim    string
+	format  string
+	ignored []string
 }
 
 func main() {
@@ -47,6 +48,7 @@ func main() {
 	flag.String("root", "", "The import path of the tested repository to add as prefix to all paths of the changed files")
 	flag.String("trim", "", "trim a prefix in the \"Impacted Packages\" column of the markdown report")
 	flag.String("format", "markdown", "output format (currently only 'markdown' is supported)")
+	flag.String("ignored", "", "a comma-separated list of package paths to ignore in the report")
 
 	err := run(programArgs())
 	if err != nil {
@@ -67,9 +69,10 @@ func programArgs() (oldCov, newCov, changedFile string, opts options) {
 	}
 
 	opts = options{
-		root:   flag.Lookup("root").Value.String(),
-		trim:   flag.Lookup("trim").Value.String(),
-		format: flag.Lookup("format").Value.String(),
+		root:    flag.Lookup("root").Value.String(),
+		trim:    flag.Lookup("trim").Value.String(),
+		format:  flag.Lookup("format").Value.String(),
+		ignored: strings.Split(flag.Lookup("ignored").Value.String(), ","),
 	}
 
 	return args[0], args[1], args[2], opts
@@ -86,7 +89,7 @@ func run(oldCovPath, newCovPath, changedFilesPath string, opts options) error {
 		return fmt.Errorf("failed to parse new coverage: %w", err)
 	}
 
-	changedFiles, err := ParseChangedFiles(changedFilesPath, opts.root)
+	changedFiles, err := ParseChangedFiles(changedFilesPath, opts.root, opts.ignored)
 	if err != nil {
 		return fmt.Errorf("failed to load changed files: %w", err)
 	}
