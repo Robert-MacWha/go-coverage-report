@@ -39,6 +39,10 @@ inputs:
     description: Trim a prefix in the "Impacted Packages" column of the markdown report.
     required: false
 
+  ignored:
+    description: 'A comma-separated list of package paths to ignore in the coverage report.'
+    required: false
+
 runs:
   using: "composite"
 
@@ -76,3 +80,4 @@ runs:
         COVERAGE_FILE_NAME: ${{ inputs.coverage-file-name }}
         ROOT_PACKAGE: ${{ inputs.root-package }}
         TRIM_PACKAGE: ${{ inputs.trim }}
+        IGNORED: ${{ inputs.ignored }}
