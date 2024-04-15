@@ -105,6 +105,8 @@ func run(oldCovPath, newCovPath, changedFilesPath string, opts options) error {
 		report.TrimPrefix(opts.trim)
 	}
 
+	log.Println(report.Markdown())
+
 	switch strings.ToLower(opts.format) {
 	case "markdown":
 		fmt.Fprintln(os.Stdout, report.Markdown())
