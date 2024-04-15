@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"math"
 	"path/filepath"
 	"sort"
@@ -90,14 +91,21 @@ func (r *Report) Markdown() string {
 
 	oldCovPkgs := r.Old.ByPackage()
 	newCovPkgs := r.New.ByPackage()
+
+	log.Println("changed packages:", r.ChangedPackages)
+	log.Println("old packages:", oldCovPkgs)
+	log.Println("new packages:", newCovPkgs)
+
 	for _, pkg := range r.ChangedPackages {
 		var oldPercent, newPercent float64
 
 		if cov, ok := oldCovPkgs[pkg]; ok {
+			log.Println("WARN: package not found in old coverage: ", pkg)
 			oldPercent = cov.Percent()
 		}
 
 		if cov, ok := newCovPkgs[pkg]; ok {
+			log.Println("WARN: package not found in new coverage: ", pkg)
 			newPercent = cov.Percent()
 		}
 
