@@ -96,6 +96,10 @@ func run(oldCovPath, newCovPath, changedFilesPath string, opts options) error {
 		return nil
 	}
 
+	log.Printf("Old Coverage: %+v\n", oldCov)
+	log.Printf("New Coverage: %+v\n", newCov)
+	log.Printf("Changed Files: %+v\n", changedFiles)
+
 	report := NewReport(oldCov, newCov, changedFiles)
 	if opts.trim != "" {
 		report.TrimPrefix(opts.trim)

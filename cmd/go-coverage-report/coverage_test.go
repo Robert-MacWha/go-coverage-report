@@ -1,14 +1,21 @@
 package main
 
-// func TestParse(t *testing.T) {
-// 	cov, err := ParseCoverage("testdata/new-coverage.txt")
-// 	require.NoError(t, err)
+import (
+	"testing"
 
-// 	assert.EqualValues(t, 102, cov.TotalStmt)
-// 	assert.EqualValues(t, 92, cov.CoveredStmt)
-// 	assert.EqualValues(t, 10, cov.MissedStmt)
-// 	assert.InDelta(t, 90.196, cov.Percent(), 0.001)
-// }
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+)
+
+func TestParse(t *testing.T) {
+	cov, err := ParseCoverage("testdata/new-coverage.txt")
+	require.NoError(t, err)
+
+	assert.EqualValues(t, 102, cov.TotalStmt)
+	assert.EqualValues(t, 92, cov.CoveredStmt)
+	assert.EqualValues(t, 10, cov.MissedStmt)
+	assert.InDelta(t, 90.196, cov.Percent(), 0.001)
+}
 
 // func TestCoverage_ByPackage(t *testing.T) {
 // 	cov, err := ParseCoverage("testdata/new-coverage.txt")
