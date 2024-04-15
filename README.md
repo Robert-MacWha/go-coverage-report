@@ -6,12 +6,12 @@
     <a href="https://github.com/fgrosse/go-coverage-report/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-BSD--3--Clause-blue.svg"></a>
 </p>
 
---- 
+---
 
 `go-coverage-report` is a **command line tool** and a **GitHub Action** that
 parses code coverage results to create a tabular code coverage report. This
 markdown report is intended as pull request comment both to highlight the
-impact of the changes on the code coverage on all updated packages and to 
+impact of the changes on the code coverage on all updated packages and to
 motivate the contributors to write tests for their code.
 
 The provided tool and GitHub Action work without any third-party services
@@ -103,7 +103,6 @@ jobs:
           coverage-file-name: "coverage.txt" # can be omitted if you used this default value
 ```
 
-
 ### Inputs
 
 <!-- Could use embedmd like this: [embedmd]:# (action.yml yaml /inputs:/ /# end of inputs/) -->
@@ -150,10 +149,10 @@ with the summary of the code coverage changes.
 
 ## Limitations
 
-- Currently, code coverage profiles are uploaded as GitHub artifacts which automatically expire after 90 days.
+* Currently, code coverage profiles are uploaded as GitHub artifacts which automatically expire after 90 days.
   In a repository which receives changes only infrequently, this might lead to issues when trying to compare
   the code coverage of a pull request with the code coverage of the main branch (see fgrosse/go-coverage-report#5).  
-- Packages with a name that differs from their directory on disk are not supported yet.
+* Packages with a name that differs from their directory on disk are not supported yet.
 
 ## Built With
 
@@ -175,9 +174,9 @@ A list of all available versions can be found at the [releases page][releases].
 
 ## Authors
 
-- **Friedrich Große** - *Initial work* - [fgrosse](https://github.com/fgrosse)
+* **Friedrich Große** - _Initial work_ - [fgrosse](https://github.com/fgrosse)
 
-- See also the list of [contributors][contributors] who participated in this project.
+* See also the list of [contributors][contributors] who participated in this project.
 
 ## License
 
